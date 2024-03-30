@@ -23,3 +23,23 @@ export const createMeal = async (req, res) => {
     }
 }
 
+export const updateMeal = async (req, res) => {
+    const {id} = req.params;
+    const {gutHealthRating} = req.body;
+    try {
+        const updatedMeal = await Meal.findByIdAndUpdate(id, {gutHealthRating}, {new: true});
+        res.status(200).json(updatedMeal);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const deleteMeal = async (req, res) => {
+    try {
+        await Meal.findByIdAndDelete(req.params.id);
+        res.status(200).json('Meal deleted successfully');
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
