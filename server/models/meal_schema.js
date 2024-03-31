@@ -17,10 +17,9 @@ const MealSchema = new Schema({
     ingredients:{
         type:[String]
     },
-    gutHealthRating:{
-        type:Number,
-        min:[1,'Rating must be at least 1'],
-        max:[5,'Rating must be at most 5']
+    feel:{
+        type:String,
+        enum:['Terrible','Bad','Neutral','Good','Great']
     },
     userId:{
         type:Schema.Types.ObjectId,
