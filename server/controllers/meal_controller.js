@@ -25,9 +25,9 @@ export const createMeal = async (req, res) => {
 
 export const updateMeal = async (req, res) => {
     const {id} = req.params;
-    const {gutHealthRating} = req.body;
+    const {feel} = req.body;
     try {
-        const updatedMeal = await Meal.findByIdAndUpdate(id, {gutHealthRating}, {new: true});
+        const updatedMeal = await Meal.findByIdAndUpdate(id, {feel}, {runValidators:true, new: true});
         res.status(200).json(updatedMeal);
     } catch (error) {
         res.status(404).json({ message: error.message });

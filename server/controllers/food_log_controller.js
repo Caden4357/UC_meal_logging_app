@@ -1,4 +1,4 @@
-import DailyFoodLog from "../models/daily_food_log.js";
+import DailyFoodLog from "../models/daily_food_log_schema.js";
 
 export const createDailyFoodLog = async (req, res) => {
     try {
