@@ -8,7 +8,7 @@ import foodLogRoutes from './routes/food_log_routes.js';
 import symptomRoutes from './routes/symptom_routes.js';
 import symptomsLogsRoutes from './routes/symptoms_logs_routes.js';
 const app = express();
-app.use(express.json(), cors({ origin: 'http://127.0.0.1:5173'}));
+app.use(express.json(), cors({origin:'*'}));
 app.use('/api', userRoutes);
 app.use('/api', mealRoutes);
 app.use('/api', foodLogRoutes);

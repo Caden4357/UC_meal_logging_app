@@ -18,6 +18,7 @@ function signTokenToCookie(res, user) {
 }
 
 export const register = async (req, res) => {
+    console.log('HERE');
     try {
         const newUser = new User(req.body);
         const user = await newUser.save();
