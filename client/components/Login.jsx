@@ -1,32 +1,36 @@
-
-
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Button, TextInput, Pressable } from 'react-native';
 import UsernameIcon from 'react-native-vector-icons/AntDesign';
 import PassIcon from 'react-native-vector-icons/MaterialIcons';
 import axios from 'axios'
+import { getItemFromSecureStore, storeDataInSecureStore } from '../lib/secureStore';
+import { UserContext } from '../context/UserContext';
 const Login = ({ navigation }) => {
+    const { id, setId } = useContext(UserContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
 
-    const submitHandler = () => {
-        console.log('HERE');
-        axios.post('http://10.0.0.205:8000/api/login',{username, password}, {withCredentials:true})
-            .then((res) => {
-                // console.log('RES: ', res.headers['set-cookie']);
-                navigation.navigate('Homepage')
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+    const submitHandler = async () => {
+        try {
+            console.log('HERE');
+            const user = await axios.post('http://10.0.0.205:8000/api/login', { username, password }, { withCredentials: true })
+            console.log('user', user.data);
+            await storeDataInSecureStore({ id: user.data._id })
+            const uid = await getItemFromSecureStore('id')
+            setId(uid)
+            console.log('id', uid);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     return (
         <View className='flex-1 items-center justify-center'>
             {/* <Text className='text-3xl font-bold my-10'>Welcome To UC Log</Text> */}
             <Text className='text-3xl font-bold my-10'>Sign In</Text>
             <View style={styles.inputStyle}>
-                <UsernameIcon style={{marginRight:6}} name="user" size={30} color={'black'} />
+                <UsernameIcon style={{ marginRight: 6 }} name="user" size={30} color={'black'} />
                 <TextInput
                     placeholder="Username"
                     className='w-full'
@@ -34,14 +38,14 @@ const Login = ({ navigation }) => {
                 />
             </View>
             <View style={styles.inputStyle}>
-                <PassIcon style={{marginRight:6}} name="password" size={30} color={'black'} />
+                <PassIcon style={{ marginRight: 6 }} name="password" size={30} color={'black'} />
                 <TextInput
                     placeholder="Password"
                     className='w-full'
                     onChangeText={text => setPassword(text)}
                 />
             </View>
-            <Text>Dont have an account? 
+            <Text>Dont have an account?
                 <Text className='text-violet-700' onPress={() => navigation.navigate('Register')}> Register Here</Text>
             </Text>
             <Pressable style={styles.loginButton}>
