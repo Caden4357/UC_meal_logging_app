@@ -6,13 +6,13 @@ import { getItemFromSecureStore } from '../lib/secureStore';
 const HomeScreen = (props) => {
 
     useEffect(() => {
-        
+
         const fetchUser = async () => {
             try {
                 const token = await getItemFromSecureStore('token');
                 console.log('token', token);
-                const user = await axios.get('http://10.0.0.205:8000/api/user', { headers: { Authorization: `${token}` } })
-                console.log('user', user.data);
+                const res = await axios.get('http://10.0.0.205:8000/api/user', { headers: { Authorization: `${token}` } })
+                console.log('res', res.data);
             }
             catch (error) {
                 console.log(error);

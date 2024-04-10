@@ -50,7 +50,7 @@ export const getUser = async (req, res) => {
         console.log('DECODED TOKEN: ', decodedToken);
         const username = decodedToken.username;
         const user = await User.findOne({username});
-        return res.status(200).json({token: req.headers.authorization, user: user});
+        return res.status(200).json({token: req.headers.authorization});
     }
     catch(error){
         res.status(401).json({ message: error.message });
