@@ -22,7 +22,7 @@ const Login = ({ navigation }) => {
             console.log('id', token);
         }
         catch (error) {
-            console.log(error);
+            navigation.navigate('DefaultError')
         }
     }
     return (
