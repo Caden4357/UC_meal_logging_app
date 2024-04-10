@@ -2,7 +2,6 @@ import * as SecureStore from 'expo-secure-store';
 
 export async function getItemFromSecureStore(key) {
     let result = await SecureStore.getItemAsync(key);
-    console.log('result', result);
     if (result) {
         return result;
     } else {

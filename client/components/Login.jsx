@@ -7,8 +7,8 @@ import { getItemFromSecureStore, storeDataInSecureStore } from '../lib/secureSto
 import { UserContext } from '../context/UserContext';
 const Login = ({ navigation }) => {
     const { id, setId } = useContext(UserContext);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('Caden43');
+    const [password, setPassword] = useState('12345678');
 
 
     const submitHandler = async () => {
@@ -16,10 +16,10 @@ const Login = ({ navigation }) => {
             console.log('HERE');
             const user = await axios.post('http://10.0.0.205:8000/api/login', { username, password }, { withCredentials: true })
             console.log('user', user.data);
-            await storeDataInSecureStore({ id: user.data._id })
-            const uid = await getItemFromSecureStore('id')
-            setId(uid)
-            console.log('id', uid);
+            await storeDataInSecureStore({ token: user.data})
+            const token = await getItemFromSecureStore('token')
+            setId(token)
+            console.log('id', token);
         }
         catch (error) {
             console.log(error);
@@ -35,6 +35,7 @@ const Login = ({ navigation }) => {
                     placeholder="Username"
                     className='w-full'
                     onChangeText={text => setUsername(text)}
+                    value={username}
                 />
             </View>
             <View style={styles.inputStyle}>
@@ -43,6 +44,8 @@ const Login = ({ navigation }) => {
                     placeholder="Password"
                     className='w-full'
                     onChangeText={text => setPassword(text)}
+                    secureTextEntry={true}
+                    value={password}
                 />
             </View>
             <Text>Dont have an account?
