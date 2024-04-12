@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { SafeAreaView, Button, View, Text, TextInput, Pressable } from "react-native"
 import Wizard from "react-native-wizard"
 import Icon from 'react-native-vector-icons/Feather';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 const UserDetails = ({ navigation }) => {
     const wizard = useRef(null)
@@ -10,6 +11,9 @@ const UserDetails = ({ navigation }) => {
     const [currentStep, setCurrentStep] = useState(0)
     const [medication, setMedication] = useState('')
     const [medications, setMedications] = useState([])
+    const [gender, setGender] = useState('')
+    const [selected, setSelected] = useState(false)
+
 
     const addMedications = () => {
         const alreadyAdded = medications.find(med => med === medication)
@@ -25,6 +29,7 @@ const UserDetails = ({ navigation }) => {
         const newMeds = medications.filter(m => m !== med)
         setMedications(newMeds)
     }
+
     const stepList = [
         {
             content:
@@ -56,10 +61,37 @@ const UserDetails = ({ navigation }) => {
                 </View>
         },
         {
-            content: <View style={{ width: 100, height: 100, backgroundColor: "#e04851" }} />,
+            content:
+                // Gender Seletion 
+                <View>
+                    <Pressable style={{ borderColor: 'black', borderWidth: 1, borderRadius: 20, width: 200, padding: 6, backgroundColor: gender === 'Male' ? '#D8BFD8' : 'transparent' }} onPress={() => setGender('Male')}>
+                        <Text className='text-center text-[18px]'><AntIcon name='man' /> Male</Text>
+                    </Pressable>
+                    <Pressable style={{ borderColor: 'black', borderWidth: 1, borderRadius: 20, marginTop: 10, width: 200, padding: 6, backgroundColor: gender === 'Female' ? '#DDA0DD' : 'transparent' }} onPress={() => setGender('Female')}>
+                        <Text className='text-center text-[18px]'><AntIcon name='woman' />  Female</Text>
+                    </Pressable>
+                    <Pressable style={{ backgroundColor: 'purple', marginTop: 4, padding: 4 }} onPress={() => wizard.current.next()}>
+                        <Text className='text-center text-white text-[18px]'>Next</Text>
+                    </Pressable>
+                    <Button disabled={isFirstStep} title="Prev" onPress={() => wizard.current.prev()} />
+
+                </View>
         },
         {
-            content: <View style={{ width: 100, height: 500, backgroundColor: "#9be07d" }} />,
+            content:
+                <View>
+                    <Pressable style={{ borderColor: 'black', borderWidth: 1, borderRadius: 20, width: 200, padding: 6, backgroundColor: gender === 'Male' ? '#D8BFD8' : 'transparent' }} onPress={() => setGender('Male')}>
+                        <Text className='text-center text-[18px]'><AntIcon name='man' /> Male</Text>
+                    </Pressable>
+                    <Pressable style={{ borderColor: 'black', borderWidth: 1, borderRadius: 20, marginTop: 10, width: 200, padding: 6, backgroundColor: gender === 'Female' ? '#DDA0DD' : 'transparent' }} onPress={() => setGender('Female')}>
+                        <Text className='text-center text-[18px]'><AntIcon name='woman' />  Female</Text>
+                    </Pressable>
+                    <Pressable style={{ backgroundColor: 'purple', marginTop: 4, padding: 4 }} onPress={() => wizard.current.next()}>
+                        <Text className='text-center text-white text-[18px]'>Next</Text>
+                    </Pressable>
+                    <Button disabled={isFirstStep} title="Prev" onPress={() => wizard.current.prev()} />
+
+                </View>
         },
         {
             content: <View style={{ width: 100, height: 100, backgroundColor: "#2634e0" }} />,

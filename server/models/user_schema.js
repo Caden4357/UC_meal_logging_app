@@ -23,6 +23,13 @@ const UserSchema = new Schema({
         type:String,
         enum:['Crohns','Ulcerative Colitis','Unknown','None'],
         default:'None'
+    },
+    medications:{
+        type:[String]
+    },
+    gender:{
+        type:String,
+        enum:['Male', 'Female', 'Other']
     }
 
 }, { timestamps: true });
