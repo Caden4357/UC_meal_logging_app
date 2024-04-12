@@ -5,16 +5,19 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
     console.log('HERE');
     try {
-        const newUser = new User(req.body);
-        const user = await newUser.save();
+        console.log('REQ BODY: ', req.body);
+        const user = await User.create(req.body);
+        console.log('NEW USER: ', user);
         const token = jwt.sign(
             { username: user.username, id: user._id },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
+        console.log('TOKEN: ',);
         res.status(201).json(token);
     } catch (error) {
-        res.status(409).json({ message: error.message });
+        console.log('ERROR: ', error);
+        res.status(409).json(error);
     }
 };
 

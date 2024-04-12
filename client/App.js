@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import { UserContext, UserProvider } from './context/UserContext';
 import { useContext } from 'react';
 import DefaultError from './screens/DefaultError';
+import UserDetails from './components/UserDetails';
 const Stack = createNativeStackNavigator();
 
 
@@ -40,6 +41,10 @@ export default function App() {
           component={HomeScreen}
         />
         <Stack.Screen
+          name='UserDetails'
+          component={UserDetails}
+        />
+        <Stack.Screen
           name="DefaultError"
           component={DefaultError}
         />
@@ -50,19 +55,27 @@ export default function App() {
   const Root = () => {
     const { id } = useContext(UserContext);
 
-    return (
-      <NavigationContainer>
-        {!id && <NotLoggedIn />}
-        {id && <LoggedIn />}
-      </NavigationContainer>
-    )
-  }
+    return <>
+      {!id && <NotLoggedIn />}
+      {id && <LoggedIn />}
+
+    </>
+    
+}
 
 
-  return (
-    <UserProvider>
-      <Root />
-    </UserProvider>
-  );
+return (
+  <UserProvider>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Root"
+          component={Root}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </UserProvider>
+);
 }
 

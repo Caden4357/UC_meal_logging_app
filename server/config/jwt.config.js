@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 const JWT_SECRET = process.env.JWT_SECRET
-console.log('LINE 3', JWT_SECRET);
 
 export default function authenticate (req, res, next) {
     const {authorization} = req.headers;

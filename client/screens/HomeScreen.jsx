@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Logout from '../components/Logout';
 import axios from 'axios';
 import { getItemFromSecureStore } from '../lib/secureStore';
-const HomeScreen = (props) => {
+const HomeScreen = ({navigation}) => {
 
     useEffect(() => {
 
@@ -15,7 +15,7 @@ const HomeScreen = (props) => {
                 console.log('res', res.data);
             }
             catch (error) {
-                console.log(error);
+                navigation.navigate('DefaultError')
             }
         }
         fetchUser();

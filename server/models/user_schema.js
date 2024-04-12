@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     },
     ibd:{
         type:String,
-        enum:['Crohns','UC','Indeterminate','None'],
+        enum:['Crohns','Ulcerative Colitis','Unknown','None'],
         default:'None'
     }
 
