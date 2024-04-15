@@ -5,7 +5,7 @@ import axios from 'axios';
 import { getItemFromSecureStore } from '../lib/secureStore';
 import HomeScreenNavBar from '../components/HomeScreenNavBar';
 import HomeScreenMain from '../components/HomeScreenMain';
-import Calendar from '../components/Calendar';
+import CalendarDisplay from '../components/CalendarDisplay';
 const HomeScreen = ({ navigation }) => {
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
     }, []);
     return (
         <View className='flex-1' style={{ marginTop: 0 }}>
-            <Calendar />
+            <CalendarDisplay />
             <HomeScreenMain navigation={navigation} />
             <HomeScreenNavBar navigation={navigation} />
             <Logout navigation={navigation} />
