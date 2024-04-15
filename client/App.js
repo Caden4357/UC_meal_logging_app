@@ -35,18 +35,21 @@ export default function App() {
 
   const LoggedIn = () => {
     return (
-      <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName='HomeScreen' >
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          screenOptions={{ headerShown: true }}
         />
         <Stack.Screen
           name='UserDetails'
           component={UserDetails}
+          screenOptions={{ headerShown: false }}
         />
         <Stack.Screen
           name="DefaultError"
           component={DefaultError}
+          screenOptions={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
