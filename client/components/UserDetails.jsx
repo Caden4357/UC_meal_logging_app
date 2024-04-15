@@ -4,6 +4,9 @@ import Wizard from "react-native-wizard"
 import Icon from 'react-native-vector-icons/Feather';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import uuid from 'react-native-uuid';
+import axios from "axios";
+import { getItemFromSecureStore } from '../lib/secureStore';
+
 const UserDetails = ({ navigation }) => {
     const wizard = useRef(null)
     const [isFirstStep, setIsFirstStep] = useState(true)
@@ -35,7 +38,10 @@ const UserDetails = ({ navigation }) => {
 
     const submitHandler = async () => {
         try{
+            const token = await getItemFromSecureStore('token');
+            const res = await axios.put('http://10.0.0.205:8000/api/user',{medications, age, gender}, { headers: { Authorization: `${token}` } })
             navigation.navigate('Root', {screen: 'HomeScreen'})
+
         }
         catch(error){
             console.log('ERROR: ', error);

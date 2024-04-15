@@ -28,7 +28,7 @@ const Login = ({ navigation }) => {
     return (
         <View className='flex-1 items-center justify-center'>
             {/* <Text className='text-3xl font-bold my-10'>Welcome To UC Log</Text> */}
-            <Text className='text-3xl font-bold my-10'>Sign In</Text>
+            <Text className='text-3xl font-bold my-10' style={{color:'#9db4a0'}}>Healthy Gut</Text>
             <View style={styles.inputStyle}>
                 <UsernameIcon style={{ marginRight: 6 }} name="user" size={30} color={'black'} />
                 <TextInput
@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
                 <Text className='text-violet-700' onPress={() => navigation.navigate('Register')}> Register Here</Text>
             </Text>
             <Pressable style={styles.loginButton}>
-                <Text className='text-center text-white text-[18px]' onPress={submitHandler}>Login</Text>
+                <Text className='text-center text-white text-[20px]' onPress={submitHandler}>Login</Text>
             </Pressable>
         </View>
     )
@@ -70,12 +70,10 @@ const styles = {
         marginVertical: 10
     },
     loginButton: {
-        backgroundColor: 'black',
-        padding: 10,
-        borderRadius: 5,
+        backgroundColor: '#9db4a0',
+        padding: 12,
+        borderRadius: 15,
         marginTop: 40,
-        borderColor: 'black',
-        borderWidth: 2,
         width: 150,
         textAlign: 'center'
     }

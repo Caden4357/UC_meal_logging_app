@@ -59,3 +59,15 @@ export const getUser = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 }
+export const updateUser = async (req, res) => {
+    try{
+        const decodedToken = jwt.decode(req.headers.authorization, {complete: true});
+        const id = decodedToken.payload.id;
+        const user = await User.findByIdAndUpdate(id, req.body, {runValidators:true, new:true})
+        return res.status(200).json(user);
+    }
+    catch(error){
+        console.log(error);
+        res.status(401).json(error);
+    }
+}

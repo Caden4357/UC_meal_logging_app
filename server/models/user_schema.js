@@ -3,6 +3,13 @@ import validator from "validator";
 import mongooseUniqueValidator from "mongoose-unique-validator";
 import bcrypt from "bcrypt";
 const {isEmail} = validator;
+
+const MedicationSchema = new Schema({
+    id: String,
+    name: String
+}, { _id: false });
+
+
 const UserSchema = new Schema({
     username: {
         type: String,
@@ -25,11 +32,14 @@ const UserSchema = new Schema({
         default:'None'
     },
     medications:{
-        type:[String]
+        type:[MedicationSchema]
     },
     gender:{
         type:String,
         enum:['Male', 'Female', 'Other']
+    },
+    age:{
+        type:Number
     }
 
 }, { timestamps: true });

@@ -28,6 +28,7 @@ const HomeScreen = ({ navigation }) => {
             <Calendar />
             <HomeScreenMain navigation={navigation} />
             <HomeScreenNavBar navigation={navigation} />
+            <Logout navigation={navigation} />
         </View>
     )
 }
