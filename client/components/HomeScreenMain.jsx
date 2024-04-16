@@ -6,7 +6,6 @@ import gutHealth from '../assets/gut-health.jpg';
 import { UserContext } from '../context/UserContext';
 const HomeScreenMain = (props) => {
     const { user } = useContext(UserContext);
-    console.log('USER HOME SCREEN', user);
     return (
         <View style={styles.mainContainer}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>

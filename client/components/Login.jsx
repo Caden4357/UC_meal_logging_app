@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
             console.log('HERE');
             const user = await axios.post('http://10.0.0.205:8000/api/login', { username, password }, { withCredentials: true })
             console.log('user', user.data);
-            await storeDataInSecureStore({ token: user.data})
+            await storeDataInSecureStore({ token: user.data.token})
             const token = await getItemFromSecureStore('token')
             setUser({id:token, username: user.data.username})
             console.log('id', token);

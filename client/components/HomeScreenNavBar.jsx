@@ -11,11 +11,11 @@ const HomeScreenNavBar = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.iconContainer}>
                 <View style={styles.iconView}>
-                    <Icon style={styles.icon} name="home" size={30} onPress={() => navigation.navigate('#')} />
+                    <Icon style={styles.icon} name="home" size={30} onPress={() => navigation.navigate('HomeScreen')} />
                     <Text>Home</Text>
                 </View>
                 <View style={styles.iconView}>
-                    <MealIcon style={styles.icon} name="food-variant" size={30} onPress={() => navigation.navigate('#')} />
+                    <AntIcon style={styles.icon} name="camera" size={30} onPress={() => navigation.navigate('Camera')} />
                     <Text>Meals</Text>
                 </View>
                 <View style={styles.iconView}>

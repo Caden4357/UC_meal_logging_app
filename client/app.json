@@ -26,7 +26,14 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
+    "plugins": [[
+      "expo-camera",
+      {
+        "cameraPermission": "Allow Gut Health to access your camera",
+        "microphonePermission": "Allow Gut Health to access your microphone",
+        "recordAudioAndroid": true
+      }
+    ],
       "expo-secure-store"
     ]
   }

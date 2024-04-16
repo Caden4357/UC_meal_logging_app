@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import UserDetails from './components/UserDetails';
 import DefaultError from './screens/DefaultError';
 import Profile from './screens/Profile';
+import CameraScreen from './screens/CameraScreen';
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
@@ -27,6 +28,7 @@ const MainNavigator = () => {
           <>
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name='Camera' component={CameraScreen} />
             <Stack.Screen name="UserDetails" component={UserDetails} />
             <Stack.Screen name="DefaultError" component={DefaultError} />
           </>

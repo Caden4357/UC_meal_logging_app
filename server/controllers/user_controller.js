@@ -73,3 +73,15 @@ export const updateUser = async (req, res) => {
         res.status(401).json(error);
     }
 }
+
+export const logout = async (req, res) => {
+    try{
+        console.log('LOGOUT');
+        req.headers.authorization = '';
+        return res.status(200).json({message: 'Logged out'});
+    }
+    catch(error){
+        console.log(error);
+        res.status(401).json(error);
+    }
+}
