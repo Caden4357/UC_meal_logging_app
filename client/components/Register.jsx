@@ -13,7 +13,7 @@ const ibs = [
     { key: '4', value: 'None' }
 ]
 const Register = ({ navigation }) => {
-    const { id, setId } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const [username, setUsername] = useState('fred2');
     const [email, setEmail] = useState('f@aol.com');
@@ -28,7 +28,7 @@ const Register = ({ navigation }) => {
             console.log('user', res.data);
             await storeDataInSecureStore({ token: res.data })
             const token = await getItemFromSecureStore('token')
-            setId(token)
+            setUser({id:token})
             navigation.navigate('Root', {screen: 'UserDetails'})
         }
         catch (error) {

@@ -6,7 +6,7 @@ import axios from 'axios'
 import { getItemFromSecureStore, storeDataInSecureStore } from '../lib/secureStore';
 import { UserContext } from '../context/UserContext';
 const Login = ({ navigation }) => {
-    const { id, setId } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [username, setUsername] = useState('Caden43');
     const [password, setPassword] = useState('12345678');
 
@@ -18,7 +18,7 @@ const Login = ({ navigation }) => {
             console.log('user', user.data);
             await storeDataInSecureStore({ token: user.data})
             const token = await getItemFromSecureStore('token')
-            setId(token)
+            setUser({id:token})
             console.log('id', token);
         }
         catch (error) {

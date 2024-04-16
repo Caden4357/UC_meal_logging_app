@@ -27,7 +27,7 @@ const HomeScreenNavBar = ({ navigation }) => {
                     <Text>Get Help</Text>
                 </View>
                 <View style={styles.iconView}>
-                    <AntIcon style={styles.icon} name="profile" size={30} onPress={() => navigation.navigate('Root', {screen: 'Profile'})} />
+                    <AntIcon style={styles.icon} name="profile" size={30} onPress={() => navigation.navigate('Profile')} />
                     <Text>Profile</Text>
                 </View>
             </View>
