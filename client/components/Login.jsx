@@ -18,7 +18,7 @@ const Login = ({ navigation }) => {
             console.log('user', user.data);
             await storeDataInSecureStore({ token: user.data})
             const token = await getItemFromSecureStore('token')
-            setUser({id:token})
+            setUser({id:token, username: user.data.username})
             console.log('id', token);
         }
         catch (error) {

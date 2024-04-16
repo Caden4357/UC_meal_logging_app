@@ -13,8 +13,9 @@ export const register = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
-        console.log('TOKEN: ',);
-        res.status(201).json(token);
+        const userRes = { username: user.username, token: token}
+
+        res.status(201).json(userRes);
     } catch (error) {
         console.log('ERROR: ', error);
         res.status(409).json(error);
@@ -39,8 +40,9 @@ export const login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
+        const userRes = { username: user.username, token: token}
 
-        res.status(200).json(token);
+        res.status(200).json(userRes);
     }   
     catch (error) {
         res.status(500).json({ message: error.message });

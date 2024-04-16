@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import MyCalendar from './MyCalendar';
+import { UserContext } from '../context/UserContext';
+
 const CalendarDisplay = (props) => {
+    const { user } = useContext(UserContext);
+
     let todaysDate = new Date();
     const [week, setWeek] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
@@ -57,7 +61,7 @@ const CalendarDisplay = (props) => {
         backgroundColor: "#f2f0e5" 
         }}>
             <View style={{flex:2, justifyContent:'center'}}>
-                <Text style={{ textAlign: 'center', fontSize: 20, padding: 10}}>Good evening, Caden43</Text>
+                <Text style={{ textAlign: 'center', fontSize: 20, padding: 10}}>Welcome back, {user?.username}</Text>
                 <Text style={{ textAlign: 'left', fontSize: 20, marginLeft:16}}>{formattedDate}</Text>
             </View>
             <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', padding: 10, alignItems: 'flex-end' }}>
