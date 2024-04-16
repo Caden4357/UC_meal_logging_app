@@ -54,7 +54,7 @@ const CalendarDisplay = (props) => {
     }
     return (
         <View style={{ flex: 2, borderBottomWidth: 1, padding: 8, paddingTop:20, marginBottom:10, 
-        backgroundColor: "#f5f1de" 
+        backgroundColor: "#f2f0e5" 
         }}>
             <View style={{flex:2, justifyContent:'center'}}>
                 <Text style={{ textAlign: 'center', fontSize: 20, padding: 10}}>Good evening, Caden43</Text>

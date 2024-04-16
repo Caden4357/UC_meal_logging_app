@@ -9,6 +9,7 @@ import { UserContext, UserProvider } from './context/UserContext';
 import { useContext } from 'react';
 import DefaultError from './screens/DefaultError';
 import UserDetails from './components/UserDetails';
+import Profile from './screens/Profile';
 const Stack = createNativeStackNavigator();
 
 
@@ -35,10 +36,15 @@ export default function App() {
 
   const LoggedIn = () => {
     return (
-      <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          screenOptions={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
           screenOptions={{ headerShown: false }}
         />
         <Stack.Screen
@@ -63,22 +69,22 @@ export default function App() {
       {id && <LoggedIn />}
 
     </>
-    
-}
+
+  }
 
 
-return (
-  <UserProvider>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  </UserProvider>
-);
+  return (
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Root"
+            component={Root}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
+  );
 }
 

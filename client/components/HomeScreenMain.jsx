@@ -1,15 +1,42 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
-
+import { ScrollView, View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import mainMeal from '../assets/meal-main.jpg';
+import health from '../assets/health.jpg';
+import gutHealth from '../assets/gut-health.jpg';
 const HomeScreenMain = (props) => {
     return (
         <View style={styles.mainContainer}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
-                {Array.from({ length: 10 }).map((_, index) => (
-                    <View key={index} style={styles.card}>
-                        <Text>Card Content {index + 1}</Text>
+                <View style={styles.card}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#9db4a0', marginBottom:20 }}>Try our AI custom meal prep</Text>
+                    <Text style={{ fontSize: 16, color: '#9db4a0', marginBottom: 20 }}>Our AI will create a custom meal plan for you based on your preferences and dietary restrictions.</Text>
+                    <View style={{ width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <Pressable onPress={() => alert('coming song')} style={{ width: '45%', backgroundColor: '#9db4a0', padding: 10, borderRadius: 10 }}>
+                            <Text style={{ color: 'white', textAlign: 'center' }}>Get Started</Text>
+                        </Pressable>
+                        <Image source={mainMeal} style={{ width: 125, height: 125, borderRadius:100 }} />
                     </View>
-                ))}
+                </View>
+                <View style={styles.card}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#9db4a0', marginBottom:20 }}>Looking for fitness tips?</Text>
+                    <Text style={{ fontSize: 16, color: '#9db4a0', marginBottom: 20 }}>Check out our blog for the latest fitness tips and tricks to help you reach your goals.</Text>
+                    <View style={{ width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <Pressable onPress={() => alert('coming song')} style={{ width: '45%', backgroundColor: '#9db4a0', padding: 10, borderRadius: 10 }}>
+                            <Text style={{ color: 'white', textAlign: 'center' }}>Get Started</Text>
+                        </Pressable>
+                        <Image source={gutHealth} style={{ width: 125, height: 125, borderRadius:100 }} />
+                    </View>
+                </View>
+                <View style={styles.card}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#9db4a0', marginBottom:20 }}>Looking for fitness tips?</Text>
+                    <Text style={{ fontSize: 16, color: '#9db4a0', marginBottom: 20 }}>Check out our blog for the latest fitness tips and tricks to help you reach your goals.</Text>
+                    <View style={{ width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <Pressable onPress={() => alert('coming song')} style={{ width: '45%', backgroundColor: '#9db4a0', padding: 10, borderRadius: 10 }}>
+                            <Text style={{ color: 'white', textAlign: 'center' }}>Get Started</Text>
+                        </Pressable>
+                        <Image source={health} style={{ width: 125, height: 125, borderRadius:100}} />
+                    </View>
+                </View>
             </ScrollView>
         </View>
     );
