@@ -53,7 +53,9 @@ const CalendarDisplay = (props) => {
         setSelectedDate(day);
     }
     return (
-        <View style={{ flex: 2, borderBlockColor: '#f5f1de', borderWidth: 0, margin: 1, backgroundColor: "#f5f1de" }}>
+        <View style={{ flex: 2, borderBottomWidth: 1, padding: 8, paddingTop:20, marginBottom:10, 
+        backgroundColor: "#f5f1de" 
+        }}>
             <View style={{flex:2, justifyContent:'center'}}>
                 <Text style={{ textAlign: 'center', fontSize: 20, padding: 10}}>Good evening, Caden43</Text>
                 <Text style={{ textAlign: 'left', fontSize: 20, marginLeft:16}}>{formattedDate}</Text>
