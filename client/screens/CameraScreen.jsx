@@ -6,6 +6,7 @@ import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import { db, storage } from '../firebaseConfig';
+
 export default function CameraScreen({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [type, setType] = useState(CameraType.back);
@@ -36,6 +37,7 @@ export default function CameraScreen({ navigation }) {
             console.log('Taking picture...');
             let photo = await cameraRef.current.takePictureAsync();
             const blob = await fetch(photo.uri).then((response) => response.blob());
+            const imageName = new Date().getTime() + '.jpg';
             console.log('Blob created');
 
             const storageRef = ref(storage, 'images/' + new Date().getTime() + '.jpg');
@@ -57,7 +59,7 @@ export default function CameraScreen({ navigation }) {
                 (error) => {
                     // Log the complete error object
                     console.error("Complete Error Object:", error);
-            
+
                     // Log detailed parts of the error
                     console.error("Error Code:", error.code);
                     console.error("Error Message:", error.message);
@@ -67,15 +69,18 @@ export default function CameraScreen({ navigation }) {
                         console.error("No server response available.");
                     }
                 },
-                () => {
-
-                    console.log('Upload is complete');
-                    // setLoading(false);
-                    // getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    //     console.log('File available at', downloadURL);
-                    //     addDoc(collection(db, 'images'), { url: downloadURL });
-                    //     setLoading(false);
-                    // });
+                async () => {
+                    try {
+                        console.log('Upload is complete');
+                        // setLoading(false);
+                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                        console.log('File available at', downloadURL);
+                        await addDoc(collection(db, 'images'), { url: downloadURL, name: imageName });
+                        setLoading(false);
+                    }
+                    catch (err) {
+                        console.error("Error adding document: ", err);
+                    }
                 }
             );
         } catch (err) {
@@ -86,7 +91,7 @@ export default function CameraScreen({ navigation }) {
     return (
         <View style={styles.container}>
             {/* ? loading circle while uploading */}
-{/* 
+            {/* 
             {
                 loading && <Text style={styles.text}>Uploading...</Text>
             } */}
