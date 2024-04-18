@@ -1,18 +1,14 @@
 import { Schema, model } from "mongoose";
 
 const MealSchema = new Schema({
-    title:{
+    foodName:{
         type:String,
         required:true,
         minLength:[2,'Title must be at least 2 characters long']
     },
-    meal:{
-        type:String,
-        required:true,
-        enum:['Breakfast','Lunch','Dinner','Snack']
-    },
-    description:{
-        type:String
+    image:{
+        type:Schema.Types.ObjectId,
+        ref:'Image',
     },
     ingredients:{
         type:[String]

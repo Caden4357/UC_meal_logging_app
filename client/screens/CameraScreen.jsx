@@ -2,11 +2,12 @@ import { Camera, CameraType } from 'expo-camera';
 import { useState, useRef } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { getItemFromSecureStore } from '../lib/secureStore';
 import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import { db, storage } from '../firebaseConfig';
-
+import axios from 'axios';
 export default function CameraScreen({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [type, setType] = useState(CameraType.back);
@@ -77,6 +78,10 @@ export default function CameraScreen({ navigation }) {
                         console.log('File available at', downloadURL);
                         await addDoc(collection(db, 'images'), { url: downloadURL, name: imageName });
                         setLoading(false);
+                        const token = await getItemFromSecureStore('token');
+
+                        const res = await axios.post('http://10.0.0.205:8000/api/log_food_image', {imageUrl: downloadURL, foodName: 'food'},  { headers: { Authorization: `${token}` } });
+                        console.log('res', res.data);
                     }
                     catch (err) {
                         console.error("Error adding document: ", err);

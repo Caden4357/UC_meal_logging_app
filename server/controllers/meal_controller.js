@@ -1,9 +1,11 @@
 import Meal from "../models/meal_schema.js";
 import jwt from "jsonwebtoken";
-
+import Image from "../models/image.model.js";
 export const getMeals = async (req, res) => {
     try {
-        const mealsByUser = await Meal.find({ userId: req.body.userId });
+        const decodedToken = jwt.decode(req.headers.authorization, {complete: true});
+        const id = decodedToken.payload.id;
+        const mealsByUser = await Meal.find({ userId: id }).populate('image').populate('userId');
         res.status(200).json(mealsByUser);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -11,15 +13,18 @@ export const getMeals = async (req, res) => {
 };
 
 export const createMeal = async (req, res) => {
-    const meal = req.body;
-    // const userId = jwt.decode(req.cookies.userToken)
-    // console.log(userId);
-    const newMeal = new Meal({ ...meal, userId: req.body.userId});
-    try {
-        await newMeal.save();
-        res.status(201).json(newMeal);
-    } catch (error) {
-        res.status(409).json({ message: error.message });
+    try{
+        const decodedToken = jwt.decode(req.headers.authorization, {complete: true});
+        const id = decodedToken.payload.id;
+        console.log('req.body', req.body.imageUrl);
+        console.log('id', id);
+        const image = await Image.create({url: req.body.imageUrl});
+        const meal = {image: image._id, foodName: req.body.foodName, userId: id};
+        const mealDoc = await Meal.create(meal);
+        res.status(201).json(mealDoc);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }
 
