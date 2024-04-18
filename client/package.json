@@ -13,8 +13,10 @@
     "@react-navigation/native-stack": "^6.9.26",
     "axios": "^1.6.8",
     "expo": "~50.0.14",
+    "expo-camera": "~14.1.2",
     "expo-secure-store": "~12.8.1",
     "expo-status-bar": "~1.11.1",
+    "firebase": "^10.11.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.73.6",
@@ -24,8 +26,7 @@
     "react-native-screens": "~3.29.0",
     "react-native-uuid": "^2.0.2",
     "react-native-vector-icons": "^10.0.3",
-    "react-native-wizard": "^2.1.1",
-    "expo-camera": "~14.1.2"
+    "react-native-wizard": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

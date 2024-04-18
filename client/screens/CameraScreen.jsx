@@ -1,17 +1,23 @@
 import { Camera, CameraType } from 'expo-camera';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-export default function CameraScreen() {
+import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import { addDoc, collection, onSnapshot } from 'firebase/firestore';
+import { db, storage } from '../firebaseConfig';
+export default function CameraScreen({ navigation }) {
+    const [loading, setLoading] = useState(false);
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
-    
+    const cameraRef = useRef(null);
     if (!permission) {
         // Camera permissions are still loading
         return <View />;
     }
 
     if (!permission.granted) {
+
         // Camera permissions are not granted yet
         return (
             <View style={styles.container}>
@@ -25,11 +31,71 @@ export default function CameraScreen() {
         setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
     const takePicture = async () => {
-        console.log('take picture');
+        // setLoading(true);
+        try {
+            console.log('Taking picture...');
+            let photo = await cameraRef.current.takePictureAsync();
+            const blob = await fetch(photo.uri).then((response) => response.blob());
+            console.log('Blob created');
+
+            const storageRef = ref(storage, 'images/' + new Date().getTime() + '.jpg');
+            const uploadTask = uploadBytesResumable(storageRef, blob);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log(`Upload is ${progress.toFixed(2)}% done`);
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    // Log the complete error object
+                    console.error("Complete Error Object:", error);
+            
+                    // Log detailed parts of the error
+                    console.error("Error Code:", error.code);
+                    console.error("Error Message:", error.message);
+                    if (error.serverResponse) {
+                        console.error("Server Response:", error.serverResponse);
+                    } else {
+                        console.error("No server response available.");
+                    }
+                },
+                () => {
+
+                    console.log('Upload is complete');
+                    // setLoading(false);
+                    // getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    //     console.log('File available at', downloadURL);
+                    //     addDoc(collection(db, 'images'), { url: downloadURL });
+                    //     setLoading(false);
+                    // });
+                }
+            );
+        } catch (err) {
+            console.error("Error capturing or uploading image: ", err);
+        }
     };
+
     return (
         <View style={styles.container}>
-            <Camera style={styles.camera} type={type}>
+            {/* ? loading circle while uploading */}
+{/* 
+            {
+                loading && <Text style={styles.text}>Uploading...</Text>
+            } */}
+            <Camera style={styles.camera} type={type} ref={cameraRef}>
+                <View style={styles.closeCameraContainer}>
+                    <TouchableOpacity onPress={takePicture}>
+                        <FontAwesome6Icon name='x' size={40} color="white" onPress={() => navigation.navigate('HomeScreen')} />
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={takePicture}>
                         <Entypo name="circle" size={72} color="white" />
@@ -64,4 +130,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    closeCameraContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        backgroundColor: 'transparent',
+        // borderWidth:2,
+        // borderColor:'white',
+        margin: 64,
+    }
 });

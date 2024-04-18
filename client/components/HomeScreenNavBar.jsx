@@ -16,7 +16,7 @@ const HomeScreenNavBar = ({ navigation }) => {
                 </View>
                 <View style={styles.iconView}>
                     <AntIcon style={styles.icon} name="camera" size={30} onPress={() => navigation.navigate('Camera')} />
-                    <Text>Meals</Text>
+                    <Text>Camera</Text>
                 </View>
                 <View style={styles.iconView}>
                     <MaterialIcon style={styles.icon} name="tag-faces" size={30} onPress={() => navigation.navigate('#')} />
