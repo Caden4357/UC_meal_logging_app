@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
 import Logout from '../components/Logout';
 import HomeScreenNavBar from '../components/HomeScreenNavBar';
 import axios from 'axios';
@@ -21,25 +21,27 @@ const Profile = (props) => {
     }, []);
     return (
         <>
-            <View style={{ flex: 4, borderWidth: 2, padding: 10 }}>
-                <Text>Profile</Text>
-                <Logout />
-            </View>
-            <View>
-                <Text>Food Log</Text>
-                {
-                    foodLog.map((food, index) => {
-                        return (
-                            <View key={index}>
-                                <Text>{food.foodName}</Text>
-                                <Text>{food.createdAt}</Text>
-                                <Image source={{ uri: food.image.url }} style={{ width: 200, height: 200 }} />
-                            </View>
-                        )
-                    })
-                }
-            </View>
-            <HomeScreenNavBar navigation={props.navigation} />
+            <ScrollView>
+                <View style={{ flex: 4, borderWidth: 2, padding: 10 }}>
+                    <Text>Profile</Text>
+                    <Logout />
+                </View>
+                <View style={{ justifyContent: 'center' }}>
+                    <Text>Food Log</Text>
+                    {
+                        foodLog.map((food, index) => {
+                            return (
+                                <View key={index}>
+                                    <Text>{food.foodName}</Text>
+                                    <Text>{food.createdAt}</Text>
+                                    <Image source={{ uri: food.image.url }} style={{ width: 200, height: 200 }} />
+                                </View>
+                            )
+                        })
+                    }
+                </View>
+                <HomeScreenNavBar navigation={props.navigation} />
+            </ScrollView>
         </>
     )
 }

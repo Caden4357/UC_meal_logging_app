@@ -78,6 +78,8 @@ export const logout = async (req, res) => {
     try{
         console.log('LOGOUT');
         req.headers.authorization = '';
+        // remove token from jwt
+        jwt.decode(req.headers.authorization, {complete: true});
         return res.status(200).json({message: 'Logged out'});
     }
     catch(error){
