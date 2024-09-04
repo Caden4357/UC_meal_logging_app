@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
         const fetchUser = async () => {
             try {
                 const token = await getItemFromSecureStore('token');
-                console.log('token', token);
+                console.log('*********TOKEN HOME SCREEN LINE 16*********', token);
                 const res = await axios.get('http://10.0.0.205:8000/api/user', { headers: { Authorization: `${token}` } })
                 console.log('res', res.data);
             }

@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { initializeFirestore } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -16,7 +17,7 @@ const firebaseConfig = {
     appId: process.env.EXPO_PUBLIC_FB_APP_ID,
     measurementId: process.env.EXPO_PUBLIC_FB_MEASUREMENT_ID
 };
-// console.log(firebaseConfig);
+console.log(firebaseConfig);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

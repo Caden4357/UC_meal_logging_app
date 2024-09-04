@@ -28,7 +28,7 @@ const Login = ({ navigation }) => {
     return (
         <View className='flex-1 items-center justify-center'>
             {/* <Text className='text-3xl font-bold my-10'>Welcome To UC Log</Text> */}
-            <Text className='text-3xl font-bold my-10' style={{color:'#9db4a0'}}>Healthy Gut</Text>
+            <Text className='text-3xl font-bold my-10' style={{color:'#9db4a0'}}>Healthy Gut | Happy Butt</Text>
             <View style={styles.inputStyle}>
                 <UsernameIcon style={{ marginRight: 6 }} name="user" size={30} color={'black'} />
                 <TextInput
@@ -44,7 +44,7 @@ const Login = ({ navigation }) => {
                     placeholder="Password"
                     className='w-full'
                     onChangeText={text => setPassword(text)}
-                    secureTextEntry={true}
+                    // secureTextEntry={true}
                     value={password}
                 />
             </View>

@@ -39,8 +39,9 @@ const UserDetails = ({ navigation }) => {
     const submitHandler = async () => {
         try{
             const token = await getItemFromSecureStore('token');
+            console.log('TOKEN: ',token);
             const res = await axios.put('http://10.0.0.205:8000/api/user',{medications, age, gender}, { headers: { Authorization: `${token}` } })
-            navigation.navigate('Root', {screen: 'HomeScreen'})
+            navigation.navigate('HomeScreen')
 
         }
         catch(error){

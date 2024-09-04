@@ -90,10 +90,11 @@ export default function CameraScreen({ navigation }) {
                     console.log('Upload is complete');
                     // setLoading(false);
                     const downloadURL = await getDownloadURL(uploadTask.snapshot.ref); // get the download url
-                    await addDoc(collection(db, 'images'), { url: downloadURL, name: imageName }); // save the download url to the database in firestore 
+                    const response = await addDoc(collection(db, 'images'), { url: downloadURL, name: imageName }); // save the download url to the database in firestore 
+                    console.log(response);
                     setLoading(false);
                     const token = await getItemFromSecureStore('token'); // get the token from secure store
-
+                    console.log("HERE Line 97");
                     const res = await axios.post('http://10.0.0.205:8000/api/log_food_image', { imageUrl: downloadURL, foodName: 'food' }, { headers: { Authorization: `${token}` } }); // send the download url to the server for mongoDB
                 }
                 catch (err) {
@@ -122,15 +123,13 @@ export default function CameraScreen({ navigation }) {
                         </View>
                         {
                             !loading ?
-                        <View style={{ zIndex: 2, position: 'absolute', bottom: 40, left: 150 }}>
-                            <Button color={'blue'} title='Submit' onPress={uploadImage} />
-                            <Button color={'red'} title='Retake' onPress={() => setPhotoUri('')} />
-                        </View>:
-                        <View style={{ zIndex: 2, position: 'absolute', bottom: 40, left: 150 }}>
-                            <Button color={'blue'} title='Loading...' onPress={uploadImage} />
-                        </View>
-
-
+                                <View style={{ zIndex: 2, position: 'absolute', bottom: 40, left: 150 }}>
+                                    <Button color={'blue'} title='Submit' onPress={uploadImage} />
+                                    <Button color={'red'} title='Retake' onPress={() => setPhotoUri('')} />
+                                </View> :
+                                <View style={{ zIndex: 2, position: 'absolute', bottom: 40, left: 150 }}>
+                                    <Button color={'blue'} title='Loading...' onPress={uploadImage} />
+                                </View>
                         }
                     </View> :
                     <Camera style={styles.camera} type={type} ref={cameraRef}>

@@ -22,6 +22,7 @@ const MainNavigator = () => {
           <>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="UserDetails" component={UserDetails} />
             <Stack.Screen name="DefaultError" component={DefaultError} />
           </>
         ) : (
@@ -29,7 +30,6 @@ const MainNavigator = () => {
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name='Camera' component={CameraScreen} />
-            <Stack.Screen name="UserDetails" component={UserDetails} />
             <Stack.Screen name="DefaultError" component={DefaultError} />
           </>
         )}

@@ -1,27 +1,29 @@
 import * as SecureStore from 'expo-secure-store';
 
+
+// improve this function to handle errors try catch
+
 export async function getItemFromSecureStore(key) {
-    let result = await SecureStore.getItemAsync(key);
-    if (result) {
-        return result;
-    } else {
-        return null;
+    try {
+        const token = await SecureStore.getItemAsync(key)
+        return token;
+    } catch (error) {
+        return error;
     }
 }
 
 export async function storeDataInSecureStore(data) {
-    for(let key in data) {
-        try {
-            await SecureStore.setItemAsync(key, data[key])
-        } catch (error) {
-            return error;
-        }
+    try {
+        console.log('data', data);
+        await SecureStore.setItemAsync('token', data.token)
+    } catch (error) {
+        return error;
     }
 }
 
 export async function logoutUser() {
     try {
-        await SecureStore.deleteItemAsync('id')
+        await SecureStore.deleteItemAsync('token')
     } catch (error) {
         return error;
     }

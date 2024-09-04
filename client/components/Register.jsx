@@ -26,10 +26,10 @@ const Register = ({ navigation }) => {
             const user = { username, email, ibd, password, confirmPassword }
             const res = await axios.post('http://10.0.0.205:8000/api/register', user, { withCredentials: true })
             console.log('user', res.data);
-            await storeDataInSecureStore({ token: res.data })
+            await storeDataInSecureStore({ token: res.data.token })
             const token = await getItemFromSecureStore('token')
             setUser({id:token, username: res.data.username})
-            navigation.navigate('Root', {screen: 'UserDetails'})
+            navigation.navigate('UserDetails')
         }
         catch (error) {
             console.log('ERROR: ', error);
@@ -73,17 +73,17 @@ const Register = ({ navigation }) => {
                     placeholder="Password"
                     className='w-full'
                     onChangeText={text => setPassword(text)}
-                    secureTextEntry={true}
+                    // secureTextEntry={true}
                     value={password}
                 />
             </View>
             <View style={styles.inputStyle}>
                 <PassIcon style={{ marginRight: 6 }} name="password" size={30} color={'black'} />
                 <TextInput
-                    placeholder="Confirm Password"
+                    placeholder="Password"
                     className='w-full'
                     onChangeText={text => setConfirmPassword(text)}
-                    secureTextEntry={true}
+                    // secureTextEntry={true}
                     value={confirmPassword}
                 />
             </View>
