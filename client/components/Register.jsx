@@ -28,7 +28,6 @@ const Register = ({ navigation }) => {
             console.log('user', res.data);
             await storeDataInSecureStore({ token: res.data.token })
             const token = await getItemFromSecureStore('token')
-            setUser({id:token, username: res.data.username})
             navigation.navigate('UserDetails')
         }
         catch (error) {

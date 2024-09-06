@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useContext } from "react"
 import { SafeAreaView, Button, View, Text, TextInput, Pressable } from "react-native"
 import Wizard from "react-native-wizard"
 import Icon from 'react-native-vector-icons/Feather';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import uuid from 'react-native-uuid';
 import axios from "axios";
+import { UserContext } from '../context/UserContext';
 import { getItemFromSecureStore } from '../lib/secureStore';
 
 const UserDetails = ({ navigation }) => {
+    const { user, setUser } = useContext(UserContext);
     const wizard = useRef(null)
     const [isFirstStep, setIsFirstStep] = useState(true)
     const [isLastStep, setIsLastStep] = useState(false)
@@ -41,6 +43,8 @@ const UserDetails = ({ navigation }) => {
             const token = await getItemFromSecureStore('token');
             console.log('TOKEN: ',token);
             const res = await axios.put('http://10.0.0.205:8000/api/user',{medications, age, gender}, { headers: { Authorization: `${token}` } })
+            console.log('*****************RES************** ', res.data);
+            setUser({id:token, username: res.data.username})
             navigation.navigate('HomeScreen')
 
         }
