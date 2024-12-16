@@ -11,7 +11,7 @@ import axios from 'axios';
 import LoadingImage from '../components/LoadingImage';
 export default function CameraScreen({ navigation }) {
     const [loading, setLoading] = useState(false);
-    const [type, setType] = useState(CameraType.back);
+    // const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const [photoUri, setPhotoUri] = useState(null)
     const [photoDesc, setPhotoDesc] = useState('');
@@ -32,9 +32,9 @@ export default function CameraScreen({ navigation }) {
         );
     }
 
-    function toggleCameraType() {
-        setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
-    }
+    // function toggleCameraType() {
+    //     setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+    // }
     const takePicture = async () => {
         try {
             setLoading(true);
@@ -132,7 +132,7 @@ export default function CameraScreen({ navigation }) {
                                 </View>
                         }
                     </View> :
-                    <Camera style={styles.camera} type={type} ref={cameraRef}>
+                    <Camera style={styles.camera} ref={cameraRef}>
                         <View style={styles.closeCameraContainer}>
                             <TouchableOpacity onPress={takePicture}>
                                 <FontAwesome6Icon name='x' size={40} color="white" onPress={() => navigation.navigate('HomeScreen')} />

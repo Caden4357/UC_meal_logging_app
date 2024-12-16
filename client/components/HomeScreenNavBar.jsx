@@ -19,8 +19,8 @@ const HomeScreenNavBar = ({ navigation }) => {
                     <Text>Camera</Text>
                 </View>
                 <View style={styles.iconView}>
-                    <MaterialIcon style={styles.icon} name="tag-faces" size={30} onPress={() => navigation.navigate('#')} />
-                    <Text>Tracker</Text>
+                    <MaterialIcon style={styles.icon} name="tag-faces" size={30} onPress={() => navigation.navigate('Barcode')} />
+                    <Text>Scan Food</Text>
                 </View>
                 <View style={styles.iconView}>
                     <FontAwesome5 style={styles.icon} name="hands-helping" size={30} onPress={() => navigation.navigate('#')} />
